@@ -1,7 +1,4 @@
 pip install -r requirements/local.txt
-python manage.py makemigrations
-python manage.py makemigrations --merge
-python manage.py migrate
 
 python manage.py makemigrations --settings=config.settings.local
 
