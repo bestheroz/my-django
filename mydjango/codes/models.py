@@ -12,7 +12,7 @@ class CodeGroup(TimeStampedModel):
 
 
 class Code(TimeStampedModel):
-    code_group = models.CharField(max_length=100)  # 코드그룹
+    code_group = models.ForeignKey(CodeGroup, on_delete=models.CASCADE)  # 코드그룹
     code = models.CharField(max_length=1000)  # 코드명
     name = models.CharField(max_length=1000)  # 상세
     available = models.BooleanField(default=False)  # 이용가능

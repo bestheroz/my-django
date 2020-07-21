@@ -14,15 +14,39 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 # from django.urls import path
+from django.contrib import admin
 from django.urls import path, include
 from rest_framework.routers import DefaultRouter
 
+from mydjango.codes.models import CodeGroup, Code
 from mydjango.codes.views import CodeGroupViewSet, CodeViewSet
 
 router = DefaultRouter()
 router.register(r"code-groups", CodeGroupViewSet)
 router.register(r"codes", CodeViewSet)
 
+
+@admin.register(CodeGroup)
+class CodeGroupAdmin(admin.ModelAdmin):
+    fields = (
+        "code_group",
+        "name",
+    )
+
+
+@admin.register(Code)
+class CodeAdmin(admin.ModelAdmin):
+    fields = (
+        "code_group",
+        "code",
+        "name",
+        "available",
+        "display_order",
+        "authority",
+    )
+
+
 urlpatterns = [
+    path("admin/", admin.site.urls),
     path("api/v1/", include(router.urls)),
 ]
